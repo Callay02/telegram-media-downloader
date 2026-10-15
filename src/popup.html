@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <title>Telegram 媒体批量下载器</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <header>
+      <span class="dot"></span>
+      <div class="brand">
+        <b>TG 媒体下载器</b>
+        <span id="chat">未检测到 Telegram 页面</span>
+      </div>
+    </header>
+
+    <section class="stats" id="stats">
+      <div><i id="s-total">0</i><span>媒体</span></div>
+      <div><i id="s-photo">0</i><span>图片</span></div>
+      <div><i id="s-video">0</i><span>视频</span></div>
+      <div><i id="s-done">0</i><span>已完成</span></div>
+      <div><i id="s-fail">0</i><span>失败</span></div>
+    </section>
+
+    <section class="grid">
+      <button id="open" class="primary">打开 / 关闭面板</button>
+      <button id="scan">扫描当前视图</button>
+      <button id="auto">自动加载全部</button>
+      <button id="selected">下载选中的图片</button>
+      <button id="dl-sel">下载选中</button>
+      <button id="dl-all">下载全部</button>
+      <button id="clear">清空列表</button>
+    </section>
+
+    <footer>
+      <label class="check">
+        <input type="checkbox" id="autodetect" />
+        <span>页面滚动时自动识别新出现的媒体</span>
+      </label>
+      <p id="hint" class="hint"></p>
+      <p class="tip">
+        提示：Telegram 用 <code>blob:</code> 地址承载媒体，刷新页面后地址会失效，扫描完请尽快下载。
+      </p>
+    </footer>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

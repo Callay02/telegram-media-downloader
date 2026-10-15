@@ -1,0 +1,691 @@
+/**
+ * Telegram 媒体批量下载器 —— 页面内面板样式
+ * 全部作用域都带 tmd- 前缀，避免影响 Telegram 自身样式。
+ */
+
+#tmd-fab {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 2147483000;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  background: linear-gradient(135deg, #4ea4f6, #2f7ad6);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+#tmd-fab:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.34);
+}
+
+#tmd-panel {
+  position: fixed;
+  right: 18px;
+  bottom: 76px;
+  z-index: 2147483001;
+  width: 430px;
+  max-width: calc(100vw - 24px);
+  max-height: min(76vh, 760px);
+  display: flex;
+  flex-direction: column;
+  font: 13px/1.45 -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  color: #10161f;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+#tmd-panel.tmd-hidden {
+  display: none !important;
+}
+
+#tmd-panel * {
+  box-sizing: border-box;
+}
+
+/* ---------------------------------------------------------------- 头部 */
+
+#tmd-panel .tmd-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: linear-gradient(135deg, #4ea4f6, #2f7ad6);
+  color: #fff;
+  cursor: move;
+  user-select: none;
+  flex: 0 0 auto;
+}
+
+#tmd-panel .tmd-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #b6e3ff;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25);
+}
+
+#tmd-panel .tmd-head b {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+#tmd-panel .tmd-head-stats {
+  margin-left: auto;
+  font-size: 12px;
+  opacity: 0.92;
+  white-space: nowrap;
+}
+
+#tmd-panel .tmd-icon-btn {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  border: none;
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#tmd-panel .tmd-icon-btn:hover {
+  background: rgba(255, 255, 255, 0.32);
+}
+
+/* ---------------------------------------------------------------- 主体 */
+
+#tmd-panel .tmd-body {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow: hidden;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+#tmd-panel .tmd-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+#tmd-panel .tmd-actions .tmd-btn {
+  flex: 1 1 auto;
+}
+
+#tmd-panel .tmd-btn {
+  padding: 7px 11px;
+  border-radius: 8px;
+  border: 1px solid #dfe6ee;
+  background: #f6f8fb;
+  color: #10161f;
+  font-size: 12.5px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.12s ease, border-color 0.12s ease;
+}
+
+#tmd-panel .tmd-btn:hover:not(:disabled) {
+  background: #eaf1fa;
+  border-color: #c8d8ea;
+}
+
+#tmd-panel .tmd-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+#tmd-panel .tmd-btn.primary {
+  background: #3390ec;
+  border-color: #3390ec;
+  color: #fff;
+}
+
+#tmd-panel .tmd-btn.primary:hover:not(:disabled) {
+  background: #2b81d6;
+}
+
+#tmd-panel .tmd-btn.danger {
+  background: #ffe9e9;
+  border-color: #f5b5b5;
+  color: #b3261e;
+}
+
+#tmd-panel .tmd-mini {
+  padding: 3px 8px;
+  border-radius: 6px;
+  border: 1px solid #dfe6ee;
+  background: #fff;
+  color: #34495e;
+  font-size: 11.5px;
+  cursor: pointer;
+}
+
+#tmd-panel .tmd-mini:hover {
+  background: #eef4fb;
+}
+
+/* ------------------------------------------------------------ 进度条 */
+
+#tmd-panel .tmd-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+/* display:flex 的优先级高于 UA 的 [hidden]{display:none}，必须显式补一条 */
+#tmd-panel .tmd-progress[hidden] {
+  display: none;
+}
+
+#tmd-panel .tmd-progress-bar {
+  height: 5px;
+  border-radius: 4px;
+  background: #e8eef5;
+  overflow: hidden;
+}
+
+#tmd-panel .tmd-progress-bar > i {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #4ea4f6, #2f7ad6);
+  transition: width 0.25s ease;
+}
+
+#tmd-panel .tmd-progress-bar > i.has-fail {
+  background: linear-gradient(90deg, #f6b34e, #e05252);
+}
+
+#tmd-panel .tmd-progress-text {
+  font-size: 11.5px;
+  color: #6b7c8f;
+}
+
+/* -------------------------------------------------------------- 过滤器 */
+
+#tmd-panel .tmd-filters {
+  font-size: 12px;
+  color: #4a5a6a;
+  gap: 10px;
+}
+
+#tmd-panel .tmd-filters label,
+#tmd-panel .tmd-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+
+#tmd-panel .tmd-num {
+  width: 54px;
+  padding: 2px 4px;
+  border: 1px solid #dfe6ee;
+  border-radius: 5px;
+  font-size: 12px;
+}
+
+#tmd-panel .tmd-count {
+  margin-left: auto;
+  font-size: 11.5px;
+  color: #6b7c8f;
+}
+
+#tmd-panel .tmd-count-sel {
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 600;
+  background: #eef2f7;
+  color: #8496a8;
+  white-space: nowrap;
+}
+
+#tmd-panel .tmd-count-sel.tmd-count-sel-on {
+  background: #3390ec;
+  color: #fff;
+}
+
+/* ---------------------------------------------------------------- 列表 */
+
+#tmd-panel .tmd-list {
+  flex: 1 1 auto;
+  min-height: 120px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border: 1px solid #e8eef5;
+  border-radius: 10px;
+  background: #fbfcfe;
+  padding: 4px;
+}
+
+#tmd-panel .tmd-empty {
+  padding: 22px 14px;
+  text-align: center;
+  color: #8496a8;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+#tmd-panel .tmd-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 6px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#tmd-panel .tmd-item:hover {
+  background: #eef4fb;
+}
+
+#tmd-panel .tmd-item.tmd-st-ok {
+  background: #f0fbf3;
+}
+
+#tmd-panel .tmd-item.tmd-st-fail {
+  background: #fff5f5;
+}
+
+#tmd-panel .tmd-item.tmd-st-working {
+  background: #fff9ec;
+}
+
+/* 已勾选的行：左侧蓝条 + 蓝色底 + 「已选择」字样（放在状态色之后，优先级更高） */
+#tmd-panel .tmd-item.tmd-selected {
+  background: #e7f1fd;
+  box-shadow: inset 3px 0 0 #3390ec;
+}
+
+#tmd-panel .tmd-item.tmd-selected:hover {
+  background: #dcebfc;
+}
+
+#tmd-panel .tmd-sel-chip {
+  display: none;
+  flex: 0 0 auto;
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 10.5px;
+  font-weight: 600;
+  background: #3390ec;
+  color: #fff;
+  white-space: nowrap;
+}
+
+#tmd-panel .tmd-item.tmd-selected .tmd-sel-chip {
+  display: inline-flex;
+}
+
+#tmd-panel .tmd-check-wrap {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+#tmd-panel .tmd-thumb {
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+  border-radius: 7px;
+  overflow: hidden;
+  background: #e8eef5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #7b8b9c;
+  font-size: 15px;
+}
+
+#tmd-panel .tmd-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+#tmd-panel .tmd-meta {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+#tmd-panel .tmd-name {
+  font-size: 12.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#tmd-panel .tmd-sub {
+  font-size: 11px;
+  color: #7b8b9c;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#tmd-panel .tmd-badge {
+  flex: 0 0 auto;
+  min-width: 34px;
+  text-align: center;
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-size: 10.5px;
+  font-weight: 600;
+  background: #e8eef5;
+  color: #5b6b7c;
+}
+
+#tmd-panel .tmd-badge.tmd-b-ok {
+  background: #d6f2de;
+  color: #1d7a3c;
+}
+
+#tmd-panel .tmd-badge.tmd-b-fail {
+  background: #ffdcdc;
+  color: #b3261e;
+}
+
+#tmd-panel .tmd-badge.tmd-b-working {
+  background: #ffeec2;
+  color: #9a6b00;
+}
+
+/* ---------------------------------------------------------------- 设置 */
+
+#tmd-panel .tmd-settings {
+  border: 1px solid #e8eef5;
+  border-radius: 10px;
+  background: #fbfcfe;
+  flex: 0 0 auto;
+}
+
+#tmd-panel .tmd-settings > summary {
+  padding: 7px 10px;
+  cursor: pointer;
+  font-size: 12.5px;
+  color: #34495e;
+  user-select: none;
+}
+
+#tmd-panel .tmd-settings-body {
+  padding: 4px 10px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+#tmd-panel .tmd-field {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+#tmd-panel .tmd-field-label {
+  font-size: 11.5px;
+  color: #4a5a6a;
+}
+
+#tmd-panel .tmd-field input {
+  padding: 5px 7px;
+  border: 1px solid #dfe6ee;
+  border-radius: 7px;
+  font-size: 12px;
+  background: #fff;
+  color: #10161f;
+}
+
+#tmd-panel .tmd-field-hint {
+  font-size: 10.5px;
+  color: #93a3b3;
+  font-style: normal;
+}
+
+#tmd-panel .tmd-settings .tmd-check {
+  font-size: 12px;
+  color: #4a5a6a;
+  align-items: flex-start;
+  line-height: 1.4;
+}
+
+#tmd-panel .tmd-settings .tmd-check input {
+  margin-top: 2px;
+  flex: 0 0 auto;
+}
+
+/* ---------------------------------------------------------------- 底部 */
+
+#tmd-panel .tmd-foot .tmd-btn {
+  flex: 1 1 0;
+}
+
+#tmd-panel .tmd-hint {
+  min-height: 0;
+  font-size: 11.5px;
+  color: #1d7a3c;
+  background: #eefaf1;
+  border-radius: 8px;
+  padding: 0 8px;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.18s ease, opacity 0.18s ease, padding 0.18s ease;
+}
+
+#tmd-panel .tmd-hint.show {
+  max-height: 60px;
+  opacity: 1;
+  padding: 6px 8px;
+}
+
+/* --------------------------- Telegram 多选后浮现的「下载选中的图片」按钮 */
+
+#tmd-sel-wrap {
+  position: fixed;
+  z-index: 2147483002;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transform: translateX(-50%);
+}
+
+#tmd-sel-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.32);
+  padding: 9px 15px;
+  border: none;
+  border-radius: 999px;
+  background: #3390ec;
+  color: #fff;
+  font: 600 13px/1 -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+#tmd-sel-vid {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 9px 13px;
+  border: 1px solid rgba(51, 144, 236, 0.5);
+  border-radius: 999px;
+  background: #ffffff;
+  color: #2b81d6;
+  font: 600 12px/1 -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif;
+  cursor: pointer;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.22);
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+#tmd-sel-vid:hover {
+  background: #eaf3fd;
+}
+
+#tmd-sel-vid:active {
+  transform: scale(0.96);
+}
+
+@media (prefers-color-scheme: dark) {
+  #tmd-sel-vid {
+    background: #223140;
+    border-color: rgba(108, 178, 247, 0.55);
+    color: #6cb2f7;
+  }
+
+  #tmd-sel-vid:hover {
+    background: #2b3f52;
+  }
+}
+
+#tmd-sel-btn:hover {
+  background: #2b81d6;
+}
+
+#tmd-sel-btn:active {
+  transform: scale(0.96);
+}
+
+#tmd-sel-btn svg {
+  flex: 0 0 auto;
+}
+
+/* -------------------------------------------------------------- 深色模式 */
+
+@media (prefers-color-scheme: dark) {
+  #tmd-panel {
+    background: #1c2733;
+    color: #e7eef6;
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.55);
+  }
+
+  #tmd-panel .tmd-btn {
+    background: #26333f;
+    border-color: #35465a;
+    color: #e7eef6;
+  }
+
+  #tmd-panel .tmd-btn:hover:not(:disabled) {
+    background: #2f3f50;
+  }
+
+  #tmd-panel .tmd-btn.primary {
+    background: #3390ec;
+    border-color: #3390ec;
+    color: #fff;
+  }
+
+  #tmd-panel .tmd-btn.danger {
+    background: #4a2b2b;
+    border-color: #6d3a3a;
+    color: #ffb4b4;
+  }
+
+  #tmd-panel .tmd-mini {
+    background: #26333f;
+    border-color: #35465a;
+    color: #cfdcea;
+  }
+
+  #tmd-panel .tmd-mini:hover {
+    background: #2f3f50;
+  }
+
+  #tmd-panel .tmd-list,
+  #tmd-panel .tmd-settings {
+    background: #17212b;
+    border-color: #2b3a4a;
+  }
+
+  #tmd-panel .tmd-item:hover {
+    background: #223140;
+  }
+
+  #tmd-panel .tmd-item.tmd-st-ok {
+    background: #1b3327;
+  }
+
+  #tmd-panel .tmd-item.tmd-st-fail {
+    background: #3a2121;
+  }
+
+  #tmd-panel .tmd-item.tmd-st-working {
+    background: #38301b;
+  }
+
+  #tmd-panel .tmd-item.tmd-selected {
+    background: #1d3448;
+    box-shadow: inset 3px 0 0 #4ea4f6;
+  }
+
+  #tmd-panel .tmd-item.tmd-selected:hover {
+    background: #23405a;
+  }
+
+  #tmd-panel .tmd-count-sel {
+    background: #26333f;
+    color: #9fb2c4;
+  }
+
+  #tmd-panel .tmd-count-sel.tmd-count-sel-on {
+    background: #3390ec;
+    color: #fff;
+  }
+
+  #tmd-panel .tmd-thumb,
+  #tmd-panel .tmd-badge {
+    background: #26333f;
+    color: #9fb2c4;
+  }
+
+  #tmd-panel .tmd-name {
+    color: #e7eef6;
+  }
+
+  #tmd-panel .tmd-sub,
+  #tmd-panel .tmd-count,
+  #tmd-panel .tmd-progress-text,
+  #tmd-panel .tmd-filters,
+  #tmd-panel .tmd-field-label,
+  #tmd-panel .tmd-settings .tmd-check {
+    color: #9fb2c4;
+  }
+
+  #tmd-panel .tmd-field input,
+  #tmd-panel .tmd-num {
+    background: #223140;
+    border-color: #35465a;
+    color: #e7eef6;
+  }
+
+  #tmd-panel .tmd-progress-bar {
+    background: #2b3a4a;
+  }
+
+  #tmd-panel .tmd-hint {
+    background: #1b3327;
+    color: #86e0a4;
+  }
+}

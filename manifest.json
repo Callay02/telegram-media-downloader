@@ -1,0 +1,79 @@
+{
+  "manifest_version": 3,
+  "name": "Telegram 媒体批量下载器",
+  "short_name": "TG Media DL",
+  "version": "1.4.1",
+  "description": "批量扫描并下载 Telegram Web（K 版 / A 版）聊天里的图片与视频，支持自动翻页、去重、命名模板。",
+  "minimum_chrome_version": "116",
+  "permissions": [
+    "downloads",
+    "storage",
+    "scripting",
+    "contextMenus"
+  ],
+  "host_permissions": [
+    "https://web.telegram.org/*",
+    "https://*.telegram.org/*"
+  ],
+  "background": {
+    "service_worker": "src/background.js"
+  },
+  "action": {
+    "default_title": "Telegram 媒体批量下载器",
+    "default_popup": "src/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://web.telegram.org/*",
+        "https://webk.telegram.org/*",
+        "https://webz.telegram.org/*"
+      ],
+      "js": [
+        "src/inject.js"
+      ],
+      "world": "MAIN",
+      "run_at": "document_start",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://web.telegram.org/*",
+        "https://webk.telegram.org/*",
+        "https://webz.telegram.org/*"
+      ],
+      "js": [
+        "src/content.js"
+      ],
+      "css": [
+        "src/content.css"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "src/inject.js"
+      ],
+      "matches": [
+        "https://web.telegram.org/*",
+        "https://webk.telegram.org/*",
+        "https://webz.telegram.org/*"
+      ]
+    }
+  ]
+}

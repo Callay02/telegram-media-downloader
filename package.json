@@ -1,0 +1,16 @@
+{
+  "name": "telegram-media-downloader",
+  "version": "1.4.1",
+  "private": true,
+  "description": "Chrome MV3 扩展：批量下载 Telegram Web 对话中的图片与视频（消息级 / 多选 / 面板三个入口）",
+  "keywords": ["chrome-extension", "telegram", "downloader", "manifest-v3"],
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "node tools/selftest.js && node tools/selftest-inject.js",
+    "icons": "python3 tools/make_icons.py",
+    "zip": "rm -f telegram-media-downloader.zip && zip -rq telegram-media-downloader.zip . -x '.git/*' '*.DS_Store' '*.zip'"
+  }
+}
